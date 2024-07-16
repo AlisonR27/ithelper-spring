@@ -66,7 +66,19 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
             user1.setRoles(Arrays.asList(adminRole));
             userRepository.save(user1);
         }
-
+        User user2 = userRepository.findByNomeUsuario("jflima");
+        if (user2 == null) {
+            User user3 = new User();
+            user3.setNomeCompleto("Joel Lima");
+            user3.setNomeUsuario("jflima");
+            user3.setPass(passwordEncoder.encode("1234"));
+            LocalDate dt =  LocalDate.of(2002,02,02);
+            Timestamp dt_nasc = Timestamp.valueOf(dt.atStartOfDay());
+            user3.setDataNascimento(dt_nasc);
+            user3.setEmail("admin@ithelper.com");
+            user3.setRoles(Arrays.asList(adminRole));
+            userRepository.save(user3);
+        }
 
         alreadySetup = true;
     }
